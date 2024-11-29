@@ -69,4 +69,8 @@ document.getElementById('botonCarrito').addEventListener('click', function() {
     agregarAlCarrito('Carpeta de Cuero', 'Carpeta tamaño A6, ideal para organizadores', 50.70);
 });
 
+
+// Corregir el error de carrito xd 
 ?>
+
+
