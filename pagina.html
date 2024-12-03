@@ -84,7 +84,7 @@
         }
 
         .nav-button {
-            background-color: #0078d7;
+            background-color: #13dabf;
             color: white;
             border: none;
             border-radius: 50%;
@@ -97,17 +97,17 @@
         }
 
         .nav-button:hover {
-            background-color: #005bb5;
+            background-color: #13dabf;
         }
        
         header {
-            background-color: #0078d7;
+            background-color: #309e8f;
             color: white;
             padding: 1em 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
         header h1 {
             margin: 0;
@@ -121,7 +121,7 @@
         }
         header .nav-buttons a {
             text-decoration: none;
-            background-color: #005bb5;
+            background-color: #31b6b2;
             color: white;
             padding: 0.5em 1em;
             border-radius: 5px;
@@ -221,6 +221,49 @@
 }
 
 
+
+/* Contenedor general */
+.licencia-container {
+    text-align: center;
+    background-color: #f8f8f8;
+    padding: 20px 0;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.licencia-container h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Contenedor de logos */
+.logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Espacio entre los logos */
+    flex-wrap: wrap; /* Permite que se ajusten en pantallas más pequeñas */
+    padding: 0 20px;
+}
+
+/* Logos individuales */
+.logos img {
+    max-width: 200px;
+    height: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.logos img:hover {
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
+    opacity: 0.8;
+}
+
+
    
     </style>
 </head>
@@ -230,7 +273,7 @@
 
     <!-- Encabezado con título y botones -->
     <header>
-        <h1>Bienvenido al Sistema</h1>
+        <h1>Bienvenido a la papeleria AZUX</h1>
         <div class="nav-buttons">
             <a href="index.html">Ir al carrito de compras</a>
             <a href="prueba.html">Ir a tu hubicacion</a>
@@ -538,10 +581,18 @@
     </div>
     
 
-
-
-
-
+<!--Explora por lincencia-->
+    <div class="licencia-container">
+        <h2>Explora por licencia</h2>
+        <div class="logos">
+            <img src="img/imagen 2.png" alt="Sanrio">
+            <img src="img/imagen 6.png" alt="Barbie">
+            <img src="img/imagen 4.png" alt="BT21">
+            <img src="img/imagen1.png" alt="Care Bears">
+            <img src="img/imagen 5.png" alt="Disney">
+        </div>
+    </div>
+    
 
 
         
