@@ -4,6 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geolocalización y Mapa</title>
+
+    <style>
+        /* General */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+    
+        /* Contenedor principal */
+        div {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+    
+        /* Títulos */
+        h1 {
+            font-size: 1.8em;
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 1em;
+        }
+    
+        /* Párrafos */
+        p {
+            font-size: 1em;
+            text-align: center;
+        }
+    
+        /* Elemento span */
+        #Pos {
+            font-weight: bold;
+            color: #007BFF;
+        }
+    
+        /* Contenedor del mapa */
+        #map {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        /* Responsivo */
+        @media (max-width: 768px) {
+            div {
+                width: 90%;
+            }
+    
+            h1 {
+                font-size: 1.5em;
+            }
+    
+            p {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    
+
     <!-- Estilo de Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <!-- Script de Leaflet -->
@@ -11,7 +76,7 @@
 </head>
 <body>
     <div style="width: 750px; margin: 2em auto;">
-        <h1>Prueba de uso de la ubicación</h1>
+        <h1>Tu hubicacion</h1>
         <p>Tu posición es: <span id="Pos">Desconocida</span></p>
     </div>
     <!-- Contenedor del mapa -->

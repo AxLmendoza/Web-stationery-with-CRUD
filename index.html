@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>CRUD de Papelería</h1>
+        <h1>Carrito de compras</h1>
         <form id="productForm">
             <input type="hidden" id="productId">
             <input type="text" id="nombre" placeholder="Nombre" required>
@@ -16,14 +16,21 @@
             <input type="number" id="precio" placeholder="Precio" required>
             <input type="number" id="stock" placeholder="Stock" required>
             <button type="submit">Guardar</button>
+            <div class="confirm-container">
+                <button id="confirmPurchaseButton">Confirmar compra</button>
+            </div>
+            <div id="purchaseMessage"></div> <!-- Contenedor para mostrar mensajes -->
+            
         </form>
+
+
         <table>
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Precio</th>
-                    <th>Stock</th>
+                    <th>Cajas</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -34,6 +41,57 @@
     <script src="script.js"></script>
 
     <script src="//code.tidio.co/l75zttiyjmteqtmppow1dymasbkdfatm.js" async></script>
+
+
+    <script>
+        document.getElementById("confirmPurchaseButton").addEventListener("click", function () {
+    // Guardar datos de la compra
+    fetch("guardar_compra.php", { method: "POST" })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Limpiar datos del carrito
+                fetch("limpiar_carrito.php", { method: "POST" })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Obtener ubicación del usuario
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(
+                                    function (position) {
+                                        const lat = position.coords.latitude;
+                                        const lon = position.coords.longitude;
+
+                                        // Mostrar mensaje con las coordenadas
+                                        const messageContainer = document.getElementById("purchaseMessage");
+                                        messageContainer.innerHTML = `
+                                            <p>El pedido sera mando a: Latitud ${lat}, Longitud ${lon}</p>
+                                            <p>Puedes revisar tu ubicacion en el partado de (Tu ubicacion) </p>
+                                            <p>Gracias por tu compra.</p>
+                                        `;
+                                    },
+                                    function (error) {
+                                        alert("No se pudo obtener la ubicación: " + error.message);
+                                    }
+                                );
+                            } else {
+                                alert("La geolocalización no está soportada en este navegador.");
+                            }
+                        } else {
+                            alert("Hubo un problema al limpiar el carrito.");
+                        }
+                    });
+            } else {
+                alert("Hubo un problema al guardar la compra.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+});
+
+    </script>
+    
 
 </body>
 </html>
