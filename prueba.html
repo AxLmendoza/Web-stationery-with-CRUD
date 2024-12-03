@@ -3,59 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script> 
-        var posElt; 
-        var poslinkElt; 
+    <title>Geolocalización y Mapa</title>
+    <!-- Estilo de Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Script de Leaflet -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <div style="width: 750px; margin: 2em auto;">
+        <h1>Prueba de uso de la ubicación</h1>
+        <p>Tu posición es: <span id="Pos">Desconocida</span></p>
+    </div>
+    <!-- Contenedor del mapa -->
+    <div id="map" style="height: 400px; width: 100%; margin: 2em auto;"></div>
+
+    <script>
+        var posElt;
+        var map;
 
         window.addEventListener('load', function() {
-            posElt = document.getElementById('Pos'); 
-            poslinkElt = document.querySelector('#PosLink > a');
-            
+            posElt = document.getElementById('Pos');
+
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(geoposOK, geoposError); 
+                navigator.geolocation.getCurrentPosition(geoposOK, geoposError);
             } else {
                 posElt.textContent = "Geolocalización no es soportada por este navegador.";
             }
         });
 
         function geoposOK(pos) {
-            // Obtenemos las coordenadas
-            var lat = pos.coords.latitude; 
-            var lon = pos.coords.longitude; 
+            // Obtener coordenadas
+            var lat = pos.coords.latitude;
+            var lon = pos.coords.longitude;
 
-            // Para mostrar la posición
+            // Mostrar coordenadas
             posElt.textContent = `Estás en la posición ${lat}, ${lon}`;
-            poslinkElt.textContent = "Mostrar tu posición en el mapa";
-            poslinkElt.href = `https://www.google.com/maps?q=${lat},${lon}`;
+
+            // Inicializar mapa
+            map = L.map('map').setView([lat, lon], 13); // Coordenadas y zoom inicial
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Añadir marcador
+            L.marker([lat, lon]).addTo(map).bindPopup('Estás aquí').openPopup();
         }
 
         function geoposError(err) {
             console.warn(err.message);
-            let msg; 
+            let msg;
             switch (err.code) {
-                case err.PERMISSION_DENIED: 
-                    msg = "No nos has dado permiso para obtener tu posición"; 
+                case err.PERMISSION_DENIED:
+                    msg = "No nos has dado permiso para obtener tu posición";
                     break;
                 case err.POSITION_UNAVAILABLE:
                     msg = "Tu posición actual no está disponible";
                     break;
-                case err.TIMEOUT: 
-                    msg = "No se ha podido obtener tu posición en un tiempo prudencial"; 
-                    break; 
-                default: 
+                case err.TIMEOUT:
+                    msg = "No se ha podido obtener tu posición en un tiempo prudencial";
+                    break;
+                default:
                     msg = "Error desconocido";
                     break;
             }
-            posElt.textContent = msg; 
+            posElt.textContent = msg;
         }
     </script>
-</head>
-<body>
-    <div style="width: 750px; margin: 2em auto;">
-        <h1>Prueba de uso de la ubicación</h1>
-        <p>Tu posición es: <span id="Pos">Desconocida</span></p>
-        <p id="PosLink"><a target="_blank"></a></p>        
-    </div>
 </body>
 </html>
